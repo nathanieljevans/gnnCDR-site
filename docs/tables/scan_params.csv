@@ -1,0 +1,10 @@
+-, Siemens, Phillips, GE, All (fMRI)
+Matrix, 256x256, -, -, 90x90
+Slices, 176, 225, 208, 60
+FOV, 256x256, 256x240, 256x256, 216x216
+%FOV phase, 100, 93.75, 100, 100
+Res (mm), 1.0mm, -, -, 2.4mm
+TR (ms), 2500, 6.31, 2500, 800
+TE (ms), 2.88, 2.9, 2, 30
+Parallel Imaging, 2x, 1.5x2.2, 2x, Off
+MultiBand Accel., Off, -, -, 6

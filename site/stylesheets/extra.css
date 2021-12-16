@@ -1,0 +1,98 @@
+
+/* TABLES */
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 24px;
+    border-collapse: collapse;
+    border-style : hidden!important;
+    border-radius: 1rem;
+    box-shadow: 0 .2rem .5rem rgba(0,0,0,.3),0 0 .05rem rgba(0,0,0,.2);
+}
+
+table th {
+    color: #fdfefe; 
+    background-color: #e6b0aa;
+    border-bottom: .05rem solid #641e16;
+    text-align: center;
+    /*padding: 3px 10px;
+    background-color: #28105f;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #e5e6b6;
+    */
+}
+
+table td {
+    padding: 3px 10px;
+    border-style : hidden!important;
+    white-space: nowrap;
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+    border-right: none;
+}
+
+
+
+:root {
+
+    /* Primary color shades */
+    --md-primary-fg-color: #861f41;
+    --md-primary-fg-color--light: #861f4194;
+    --md-primary-fg-color--dark: #ac325a;
+    --md-primary-bg-color: hsla(0, 0%, 100%, 1);
+    --md-primary-bg-color--light: hsla(0, 0%, 100%, 0.7);
+    --md-text-link-color: hsla(231, 48%, 48%, 1);
+
+    /* Accent color shades */
+    --md-accent-fg-color: rgb(98, 18, 189);
+    --md-accent-fg-color--transparent: hsla(189, 100%, 37%, 0.1);
+    --md-accent-bg-color: hsla(0, 0%, 100%, 1);
+    --md-accent-bg-color--light: hsla(0, 0%, 100%, 0.7);
+  }
+  
+  :root > * {
+
+    .highlight .nv{
+        color: #0FF1CE;
+    }  
+    /* Code block color shades NOT WORKING  */
+    --md-code-bg-color: #861f41!important; 
+    --md-code-fg-color: hsla(200, 18%, 26%, 1);
+
+    /* Code for admonition specific items 
+    --md-admonition-fg-color: hsla(100, 8%, 96%, 1);
+    */
+
+    /* Footer */
+    --md-footer-bg-color: #861f41;
+    --md-footer-bg-color--dark: hsla(0, 0%, 0%, 0.32);
+    --md-footer-fg-color: hsla(0, 0%, 100%, 1);
+    --md-footer-fg-color--light: hsla(0, 0%, 100%, 0.7);
+    --md-footer-fg-color--lighter: hsla(0, 0%, 100%, 0.3);
+  }
+
+/*
+:root > * {
+ --md-code-hl-number-color
+--md-code-hl-special-color
+--md-code-hl-function-color
+--md-code-hl-constant-color
+--md-code-hl-keyword-color
+--md-code-hl-string-color
+--md-code-hl-name-color
+--md-code-hl-operator-color
+--md-code-hl-punctuation-color
+--md-code-hl-comment-color
+--md-code-hl-generic-color
+--md-code-hl-variable-color
+  --md-code-bg-color: #525a70;
+ --md-code-fg-color
+--md-code-bg-color
+--md-code-hl-color
+  --md-code-hl-string-color: #0FF1CE;
+}
+*/

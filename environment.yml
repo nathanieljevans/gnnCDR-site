@@ -1,0 +1,18 @@
+name: gnnCDR-site
+
+channels: 
+    - defaults 
+
+dependencies:
+    - python=3.9
+    - mkdocs-material
+    - mkdocs
+    - slugify
+    - pymdown-extensions
+    - pip
+    - pip:
+        - sphinx-rtd-theme
+        - mkdocs
+        - mkdocstrings
+        - mkdocs-table-reader-plugin
+        - https://github.com/mitya57/python-markdown-math/archive/master.zip

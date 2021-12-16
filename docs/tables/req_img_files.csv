@@ -1,0 +1,11 @@
+Type, Size, File, Space, Role
+anat, `324K`, space-ACPC_dseg.nii.gz, native, Segmented T1
+anat, `476K`, space-MNI_desc-wmparc_dseg.nii.gz, MNI, Segmented T1
+anat, `6.5M`, T1w_space-MNI_brain.nii.gz, MNI, T1
+func, `2.7M`, task-rest_bold_atlas-*.ptseries.nii, MNI, PT series
+func, `16.K`, task-rest_desc-filtered_motion_mask.mat, -, Censored motion mask at different FD thresholds
+stat, `8.0K`, lh/rh.aparc.DKTatlas40.stats, -, Segmented vols from Desikan-Killiany atlas
+stat, `12.K`, lh/rh.aparc.a2009s.stats, -, Segmented vols for cortical parcellation
+stat, `8.0K`, lh/rh.aparc.stats, -, Segmented vols for cortical parcellation
+stat, `12.K`, aseg.stats, -, Segmented vols for sub-cortical parcellation
+
