@@ -16,3 +16,27 @@ The `Train` and `Test` splits will only have single-agent perturbations. Since o
 # Combination-agent Dataset
 
 The validation set will include only chemical combination-agent data. Performance on this data subset is the ultimate goal of our project. 
+
+# Example 
+
+```python
+
+MySplitter = gnn_cdr.utils.DataSplitter('../data/synthetic_data.h5', train_test_ratio=0.8, include_genetic_perts=True)
+splits = MySplitter.get_idxs()
+
+print('# train obs:', splits['train'].shape[0])
+print('# test obs:', splits['test'].shape[0])
+print('# val observations:', splits['val'].shape[0])
+
+```
+
+Output: 
+
+```
+
+# train obs: 13530
+# test obs: 550
+# val observations: 123750
+
+``` 
+

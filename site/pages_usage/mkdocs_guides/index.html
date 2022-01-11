@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Mkdocs Help - gnnCDR</title>
+  <title>Mkdocs Help - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -38,7 +38,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> gnnCDR</a>
+        <a href="../.." class="icon icon-home"> Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -53,38 +53,11 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Synthetic Data</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_synthetic_data/overview/">Overview</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../synth_data/generation/">Generating a Synthetic Dataset</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_synthetic_data/example/">Example</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../synth_data/data_obj/">The Synthetic gnnCDR Data Object</a>
                     </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Real Data</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_real_data/l1000/">LINCS L1000</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_real_data/depmap/">DepMap</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_real_data/fi/">Reactome FI</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_real_data/cmap_cmpd/">CMAP Compound Data</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">GNNCDR</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_gnnCDR/gnncdr/">GNNCDR</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_gnnCDR/naive/">Naive Model</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Experiments</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_experiments/l1000_cond/">L1000 Data Conditions</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_experiments/sparsity/">Sparsity</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_experiments/noise/">Noise</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../pages_experiments/ppi_dti_error/">PPI/DTI Error</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../synth_data/data_split/">Creating Train/Test/Val Datasets</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">User Guide</span></p>
@@ -107,7 +80,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">gnnCDR</a>
+        <a href="../..">Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
       </nav>
 
       
@@ -152,7 +125,7 @@
         <a href="../syntax_examples/" class="btn btn-neutral float-right" title="Mkdocs Syntax">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../pages_experiments/ppi_dti_error/" class="btn btn-neutral" title="PPI/DTI Error"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../synth_data/data_split/" class="btn btn-neutral" title="Creating Train/Test/Val Datasets"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -180,7 +153,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../pages_experiments/ppi_dti_error/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../synth_data/data_split/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../syntax_examples/" style="color: #fcfcfc">Next &raquo;</a></span>
@@ -190,6 +163,9 @@
     <script>var base_url = '../..';</script>
     <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+      <script src="../../javascripts/mathjax.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>
         window.onload = function () {

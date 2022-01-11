@@ -11,9 +11,12 @@ copyright: Copyright &copy; 2021 Nate Evans
 nav:
 - 'Home': index.md
 - 'Synthetic Data': 
-  - 'Generating a Synthetic Dataset': ./synth_data/generation.md
-  - 'The Synthetic gnnCDR Data Object': ./synth_data/data_obj.md
-  - 'Creating Train/Test/Val Datasets': './synth_data/data_split.md'
+  - 'Generating a Synthetic Dataset': ./01_synth_data/generation.md
+  - 'The Synthetic gnnCDR Data Object': ./01_synth_data/data_obj.md
+  - 'Creating Train/Test/Val Datasets': ./01_synth_data/data_split.md
+- 'Model Architecture': 
+  - 'gnnCDR': ./02_model/gnnCDR_arch.md
+  - 'naiveNN': ./02_model/naiveNN_arch.md
 
 - 'User Guide': 
   - 'Mkdocs Help': pages_usage/mkdocs_guides.md
