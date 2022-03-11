@@ -10,13 +10,28 @@ copyright: Copyright &copy; 2021 Nate Evans
 
 nav:
 - 'Home': index.md
+- 'Motivation': motivation.md
+- 'Problem Overview': problem_overview.md
 - 'Synthetic Data': 
   - 'Generating a Synthetic Dataset': ./01_synth_data/generation.md
   - 'The Synthetic gnnCDR Data Object': ./01_synth_data/data_obj.md
   - 'Creating Train/Test/Val Datasets': ./01_synth_data/data_split.md
+- 'Real Data':
+  - 'Creating a Global Graph': 
+    - 'Functional Interaction Network': ./02_real_data/fi_graph.md
+    - 'Drug-Target Interaction Network': ./02_real_data/dti_graph.md
+  - 'Exogenous Features': 
+    - 'Overview': ./02_real_data/overview.md
+    - 'Expression': ./02_real_data/expression.md
+    - 'Mutation': ./02_real_data/mutation.md
+    - 'Copy Number Variation (CNV)': ./02_real_data/cnv.md
+    - 'Methylation': ./02_real_data/methylation.md
+    - 'Gene Dependency': ./02_real_data/gene_dep.md
 - 'Model Architecture': 
-  - 'gnnCDR': ./02_model/gnnCDR_arch.md
-  - 'naiveNN': ./02_model/naiveNN_arch.md
+  - 'gnnCDR': ./03_model/gnnCDR_arch.md
+  - 'naiveNN': ./03_model/naiveNN_arch.md
+  - 'Choice of Target and Metrics': './03_model/targets_and_metrics.md'  
+  - 'PPI trainable edge weights': './03_model/ppi_context_edge_weight_decay.md'
 
 - 'User Guide': 
   - 'Mkdocs Help': pages_usage/mkdocs_guides.md

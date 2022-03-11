@@ -2,7 +2,7 @@
 
 We use the [`GeneNetWeaver`](https://pubmed.ncbi.nlm.nih.gov/21697125/) package to simulate synthetic data
 
-![](https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/bioinformatics/27/16/10.1093_bioinformatics_btr373/2/btr373f1.jpeg?Expires=1642535458&Signature=RmsacRhYGRDunPbarJL8xL72eivbKqciVgRfZjv1Tb1hdqfk3o-GeNkMu~SLgAekPRBEWiyWCS71LLssIcAPWmG5kTKNR5rUqFCZlyhAFWR0GmJCJVp2mWMPlF0V0zMbIdsF05fIC99KbNX~I2ZjdurDb6QBfceJev6aG2VfetKsj9K8oYHnSA6xChoQYua1CewZU5v~Ffpe8LZExs4DmyWe9NV9wt56IWwacrfOxgqmdTfSQwZYtWATgItL2f9zGZwXbxfuBms92WI9TJs7Al1CQzPyeQbPiKqqlCGRXkx0Z6vTEm9cp7A03FTVP0G~mn1jSJEe8O01eW5k2jFkfQ__&Key-Pair-Id=APKAIE5G5CRDK6RD3PGA)
+![](../imgs/gnw_overview.PNG)
 **Figure 1**: GeneNetWeaver graphic from the original paper. We focus on package elements illustrated by section B. [source](https://academic.oup.com/bioinformatics/article/27/16/2263/254752).
 
 
@@ -92,7 +92,7 @@ max_kd = 0
 
 ## Usage 
 
-To simulate data and produce the desired hdf5 file, navigate to the `scripts` directory and run: 
+To simulate data and produce the desired hdf5 file, first update the `settings.txt` file found in `gnn_cdr/gnw/gnw/` to reflect your desired parameters. Next, navigate to the `scripts` directory and run: 
 
 ```bash 
 (gnnCDR) $ python create_synthetic_data.py --gnw_cwd ../gnn_cdr/gnw/gnw/ --out ../synthetic_data.h5
@@ -155,6 +155,92 @@ perts
 ![](synth_pca_01.png)
  
 (left) Colored by `cell context` (middle) colored by perturbation type, filtered to genetic perturbations only. (right) colored by time.
+
+# Generating synthetic data splits 
+
+To create test/train/val splits, use the script: 
+
+```bash 
+
+python create_data_splits.py --data ../data/synthetic_data.h5 --out ../output/ --prop 0.7
+
+```
+
+See `$ python create_data_splits --help` for command line options.
+
+# Creating train/test/val datasets 
+
+The last step before we can move on to model training is to do the necessary pre-processing and create data splits. This can be done with: 
+
+```bash 
+
+$ python SynthDataPreprocessing.py --input ../data/synthetic_data.h5 --output ../data/synthetic_data_PREPROC.h5
+
+```
+
+See `$ python SynthDataPreprocessing.py` --help for command line options
+
+This will produce a `.h5` file with the following structure: 
+
+```
+cell_model
+         GRN_removed_edges
+                 <HDF5 dataset "cell_line_0": shape (6, 2), type "|S3">
+                 <HDF5 dataset "cell_line_1": shape (9, 2), type "|S3">
+                 <HDF5 dataset "cell_line_2": shape (8, 2), type "|S3">
+                 <HDF5 dataset "cell_line_3": shape (5, 2), type "|S3">
+                 <HDF5 dataset "cell_line_4": shape (12, 2), type "|S3">
+                 <HDF5 dataset "cell_line_5": shape (10, 2), type "|S3">
+                 <HDF5 dataset "cell_line_6": shape (5, 2), type "|S3">
+                 <HDF5 dataset "cell_line_7": shape (10, 2), type "|S3">
+                 <HDF5 dataset "cell_line_8": shape (6, 2), type "|S3">
+         <HDF5 dataset "labels": shape (10,), type "|S11">
+         <HDF5 dataset "onehot": shape (137940, 10), type "<f4">
+global_graph
+         KD
+                 <HDF5 dataset "node_names": shape (26,), type "|S6">
+                 targets
+                         protein
+                                 <HDF5 dataset "edge_index": shape (2, 26), type "<i8">
+         KO
+                 <HDF5 dataset "node_names": shape (26,), type "|S6">
+                 targets
+                         protein
+                                 <HDF5 dataset "edge_index": shape (2, 26), type "<i8">
+         OE
+                 <HDF5 dataset "node_names": shape (26,), type "|S6">
+                 targets
+                         protein
+                                 <HDF5 dataset "edge_index": shape (2, 26), type "<i8">
+         agonist
+                 <HDF5 dataset "node_names": shape (5,), type "|S9">
+                 targets
+                         protein
+                                 <HDF5 dataset "edge_index": shape (2, 7), type "<i8">
+         inhibitor
+                 <HDF5 dataset "node_names": shape (5,), type "|S11">
+                 targets
+                         protein
+                                 <HDF5 dataset "edge_index": shape (2, 18), type "<i8">
+         protein
+                 activates
+                         protein
+                                 <HDF5 dataset "edge_index": shape (2, 66), type "<i8">
+                 inhibits
+                         protein
+                                 <HDF5 dataset "edge_index": shape (2, 59), type "<i8">
+                 <HDF5 dataset "node_names": shape (100,), type "|S4">
+pert
+         <HDF5 dataset "conc_um": shape (137940,), type "|S46">
+         <HDF5 dataset "pert_name": shape (137940,), type "|S24">
+         <HDF5 dataset "pert_type": shape (137940,), type "|S20">
+protein
+         <HDF5 dataset "x": shape (137940, 100), type "<f8">
+         <HDF5 dataset "y": shape (137940, 100), type "<f8">
+time
+         <HDF5 dataset "max_time": shape (), type "<f8">
+         <HDF5 dataset "time": shape (137940,), type "<f8">
+```
 
 
 # References 
