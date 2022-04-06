@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>gnnCDR - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../assets/_mkdocstrings.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "gnnCDR";
+    var mkdocs_page_input_path = "03_model/gnnCDR_arch.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../motivation/">Motivation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../problem_overview/">Problem Overview</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Synthetic Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/generation/">Generating a Synthetic Dataset</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_obj/">The Synthetic gnnCDR Data Object</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_split/">Creating Train/Test/Val Datasets</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Real Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Creating a Global Graph</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/fi_graph/">Functional Interaction Network</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/dti_graph/">Drug-Target Interaction Network</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Exogenous Features</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/overview/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/expression/">Expression</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/mutation/">Mutation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/cnv/">Copy Number Variation (CNV)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/methylation/">Methylation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/gene_dep/">Gene Dependency</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Architecture</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">gnnCDR</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../naiveNN_arch/">naiveNN</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../targets_and_metrics/">Choice of Target and Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../ppi_context_edge_weight_decay/">PPI trainable edge weights</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/mkdocs_guides/">Mkdocs Help</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/syntax_examples/">Mkdocs Syntax</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Model Architecture &raquo;</li>
+        
+      
+    
+    <li>gnnCDR</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="graph-neural-network-cancer-drug-response-gnncdr">Graph Neural Network Cancer Drug Response (gnnCDR)</h1>
+<p>This is our primary model, which incorporates protein-protein interactions as prior knowledge. We do this in a <code>graph neural network</code> (GNN) framework. The graph object is specified by <code>edge_index</code> (characterizes edges in the network) and <code>edge_attr</code> (characterizes edge features). Node features are specified by <code>expr (t=0)</code> for protein nodes and by <code>drug</code> for perturbation nodes. </p>
+<p align="center">
+    <img src="../gnnCDR_model.PNG" alt="..." width=400>
+</p>
+
+<p>Similar to the <code>naiveNN</code> architecture, we predict a time-agnostic latent representation for each gene/node (specified as <code>z</code> in figure 1). This mechanism allows us to use a single, relatively simple, fully-connected neural network to be shared across all genes; This function takes the time-agnostic latent representation of a gene <em>and</em> <code>time</code>, and predicts a discrete time-point's expression value. In this way, we can train our model to predict time-series through individual time points. </p>
+<h1 id="graph-structure">Graph structure</h1>
+<p><img alt="" src="../../01_synth_data/synth_data_graph_obj.PNG" /></p>
+<h1 id="trainable-edge-attributes">Trainable Edge Attributes</h1>
+<p>Edges are separated by edge type and can fall into one of the following categories: </p>
+<ul>
+<li>(agonist, targets, protein)</li>
+<li>(inhibitor, targets, protein)</li>
+<li>(KO, targets, protein)</li>
+<li>(KD, targets, protein)</li>
+<li>(OE, targets, protein)</li>
+<li>(protein, activates, protein)</li>
+<li>(protein, inhibits, protein)</li>
+</ul>
+<p>There are unique graph convolution parameter sets that operate on each edge type; however, we also desire to include trainable edge features in <em>some</em> of these edge types. </p>
+<h2 id="learning-binding-affinity">Learning Binding Affinity</h2>
+<p>To capture drug-target <code>binding affinity</code>, commonly characterized by the pharmacological <em>binding affinity</em> value, we add a trainable edge parameter for all edges of type: </p>
+<ul>
+<li>(agonist, targets, protein)</li>
+<li>(inhibitor, targets, protein)</li>
+</ul>
+<h2 id="learning-context-specific-ppis">Learning context-specific PPIs</h2>
+<p>Our approach relies on the premise that gene expression is largely mediated by PPIs. A pragmatic challenge of this premise is that most PPI databases are aggregations across multiple cell types and cancers – thus representing possible PPIs but unlikely to characterize any <em>individual</em> cellular context (e.g., only a subset of all possible PPIs are active in any given cell context). This means that our GNN must operate on an imperfect PPI graph that has few missing edges but many <em>contextually</em> false edges. We hypothesize that GNN flexibility will be able to account for the error in PPI data by taking advantage of other feature types ond mechanisms. We address this challenge in two ways. </p>
+<p>First, we include intrinsic cancer features (expression, mutation, copy number variation, methylation, or gene dependency) to mediate proper message passing between nodes. We hypothesize that our GNN model can use the local neighborhood of intrinsic features to mediate information flow along each edge. We rationalize that this assumption is valid in many cases. For instance, certain expression, methylation patterns, mutations or CNV patterns may indicate that a protein is not functional. Our model should use these node features to limit information flow along the respective incoming and outgoing edges. We note that our synthetic data does not model intrinsic features like mutation, CNV or methylation – and therefore, our preliminary synthetic evaluation of this approach is limited. </p>
+<p>Second, we use global features of cellular context to predict latent edge features. We use an attention mechanism to predict a protein-protein edge feature based on the cellular context, which allows our method to model complex cell specific edge behavior (e.g., for cell type A, we learn an importance feature for every PPI edge). We rationalize that intrinsic cancer features will not be able to account for more complex biological scenarios such as protein localization or quaternary structure, which are likely to cause distinct subsets of contextually active PPIs (rather than all in/out edges of a node being active/inactive).</p>
+<p>In our synthetic data, we one-hot encode <code>cell-line</code> (e.g., the unqiue synthetic data GRN model used to create each, so called "cell line's" unique behavior). This <code>cell-line</code> input is used to predict a set of edge features for every edge of type: </p>
+<ul>
+<li>(protein, activates, protein)</li>
+<li>(protein, inhibits, protein)</li>
+</ul>
+<p>As such, each <code>cell-line</code> can learn a unique set of PPI edge features. We believe that this mechanism will play an important role in capturing cell-type specific regulatory behavior. </p>
+<h1 id="example">Example</h1>
+<pre><code class="language-python">
+dummy_data          = train_dataset.__getitem__(0)  # HeteroData object from SynthHeteroDataset
+gene_names          = train_dataset.gene_names      # gene names, specifies node index
+pert_names          = train_dataset.pert_names      # perturbation names 
+pert_map            = train_dataset.pert_map        # perturbation map, specifies each perturbation type name's and node index (6 pert. types)
+
+hidden_channels     = 25                            # the number of hidden channels to use in each GNN layer / convolution 
+num_layers          = 10                            # the number of GNN layers to include 
+nheads              = 5                             # the number of attention heads to use in PPI convolutions
+beta                = 0.8                           # parameter specifying residual connection strength
+dropout             = 0.3                           # regularization parameter
+pairnorm            = True                          # whether to use `pairnorm` or not - improves performance when `num_layers` &gt; 3
+########################################################################
+########################################################################
+
+model = gnn_cdr.model.GNNCDR(   gene_names         = gene_names, 
+                                pert_names         = pert_names,
+                                pert_map           = pert_map,
+                                data               = dummy_data,
+                                hidden_channels    = hidden_channels,
+                                num_layers         = num_layers,
+                                nheads             = nheads,
+                                beta               = beta, 
+                                dropout            = dropout,
+                                pairnorm           = pairnorm   )  
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../naiveNN_arch/" class="btn btn-neutral float-right" title="naiveNN">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../02_real_data/gene_dep/" class="btn btn-neutral" title="Gene Dependency"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2021 Nate Evans</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../02_real_data/gene_dep/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../naiveNN_arch/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+      <script src="../../javascripts/mathjax.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

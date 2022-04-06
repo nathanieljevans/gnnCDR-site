@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Methylation - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../assets/_mkdocstrings.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Methylation";
+    var mkdocs_page_input_path = "02_real_data/methylation.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../motivation/">Motivation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../problem_overview/">Problem Overview</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Synthetic Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/generation/">Generating a Synthetic Dataset</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_obj/">The Synthetic gnnCDR Data Object</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_split/">Creating Train/Test/Val Datasets</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Real Data</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="#">Creating a Global Graph</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../fi_graph/">Functional Interaction Network</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../dti_graph/">Drug-Target Interaction Network</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Exogenous Features</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../overview/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../expression/">Expression</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mutation/">Mutation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../cnv/">Copy Number Variation (CNV)</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Methylation</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#data-source-and-info">Data source and info</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reactome-fi-coverage">Reactome FI Coverage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lincs-coverage">LINCS Coverage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#methylation-distribution">Methylation distribution</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cross-gene-aggregation-and-mean-imputation">Cross-gene aggregation and mean-imputation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#accessing-individual-cell-line-methylation">Accessing individual cell line methylation</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../gene_dep/">Gene Dependency</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Architecture</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/gnnCDR_arch/">gnnCDR</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/naiveNN_arch/">naiveNN</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/targets_and_metrics/">Choice of Target and Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/ppi_context_edge_weight_decay/">PPI trainable edge weights</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/mkdocs_guides/">Mkdocs Help</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/syntax_examples/">Mkdocs Syntax</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Real Data &raquo;</li>
+        
+      
+        
+          <li>Exogenous Features &raquo;</li>
+        
+      
+    
+    <li>Methylation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="methylation">Methylation</h1>
+<h2 id="data-source-and-info">Data source and info</h2>
+<p>Provided from <code>CCLE 2019</code> release of <a href="https://depmap.org/portal/download/all/?releasename=CCLE+2019&amp;filename=CCLE_RRBS_tss_CpG_clusters_20181022.txt.gz">CCLE DNA methylation data (promoter CpG clusters)</a>. </p>
+<p>Citation: </p>
+<ol>
+<li>Mahmoud Ghandi, Franklin W. Huang, Judit Jané-Valbuena, Gregory V. Kryukov, ... Todd R. Golub, Levi A. Garraway &amp; William R. Sellers. 2019. Next-generation characterization of the Cancer Cell Line Encyclopedia. Nature 569, 503–508 (2019). </li>
+</ol>
+<blockquote>
+<p>"RRBS: For 843 cell lines, the RRBS method was used as previously described in [2]" </p>
+</blockquote>
+<ol>
+<li>Boyle, P. et al. Gel-free multiplexed reduced representation bisulfite sequencing for large-scale DNA methylation profiling. Genome Biol. 13, R92 (2012).</li>
+</ol>
+<h2 id="reactome-fi-coverage">Reactome FI Coverage</h2>
+<p>11300 / 13609 (83%) of the reactome FI genes have methylation values. </p>
+<h2 id="lincs-coverage">LINCS Coverage</h2>
+<p>Of all the cell lines in LINCS, and within those lines that also have coverage in <code>CNV</code>, <code>Expression</code> and <code>Mutation</code>, there are <strong>115</strong> cell lines that also have methylation coverage. </p>
+<h2 id="methylation-distribution">Methylation distribution</h2>
+<p>Methylation values range from [0,1]. </p>
+<p><img alt="" src="../methyl_dist.png" /></p>
+<h2 id="cross-gene-aggregation-and-mean-imputation">Cross-gene aggregation and mean-imputation</h2>
+<p>The dataset provided by [1] (downloaded through DepMap) contains multiple CpG sites per Gene. We first convert to ensembl ID's (as some genes map to the same ensembl ID), and then aggregate the average methylation value for each ensembl gene identifier. After this step, ~1.5% of values were <code>NA</code>. </p>
+<p>NA values are imputed by filling with the mean methylation value (~0.35). </p>
+<h2 id="accessing-individual-cell-line-methylation">Accessing individual cell line methylation</h2>
+<p>We can get a specific cell line's methylation by using the method:</p>
+<pre><code>x = gnn_cdr.depmap.get_cell_line_ccle_methyl(methyl, cell_line, genelist, impute_val)
+</code></pre>
+<p>where:</p>
+<ul>
+<li><code>methyl</code> is the pandas dataframe returned by <code>load_ccle_methyl()</code>.</li>
+<li><code>cell_line</code> is the cell_iname identifier</li>
+<li><code>genelist</code> is the list of genes to return; note, genes that are in genelist but not in expr will be imputed by <code>impute_val</code>. </li>
+<li><code>impute_val</code> will be used to fill missing genes methylation value. </li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../gene_dep/" class="btn btn-neutral float-right" title="Gene Dependency">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../cnv/" class="btn btn-neutral" title="Copy Number Variation (CNV)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2021 Nate Evans</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../cnv/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../gene_dep/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+      <script src="../../javascripts/mathjax.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

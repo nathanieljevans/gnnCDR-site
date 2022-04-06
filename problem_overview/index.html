@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Problem Overview - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Problem Overview";
+    var mkdocs_page_input_path = "problem_overview.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../motivation/">Motivation</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Problem Overview</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Synthetic Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../01_synth_data/generation/">Generating a Synthetic Dataset</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../01_synth_data/data_obj/">The Synthetic gnnCDR Data Object</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../01_synth_data/data_split/">Creating Train/Test/Val Datasets</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Real Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Creating a Global Graph</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/fi_graph/">Functional Interaction Network</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/dti_graph/">Drug-Target Interaction Network</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Exogenous Features</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/overview/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/expression/">Expression</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/mutation/">Mutation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/cnv/">Copy Number Variation (CNV)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/methylation/">Methylation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/gene_dep/">Gene Dependency</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Architecture</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../03_model/gnnCDR_arch/">gnnCDR</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../03_model/naiveNN_arch/">naiveNN</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../03_model/targets_and_metrics/">Choice of Target and Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../03_model/ppi_context_edge_weight_decay/">PPI trainable edge weights</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../pages_usage/mkdocs_guides/">Mkdocs Help</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../pages_usage/syntax_examples/">Mkdocs Syntax</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Problem Overview</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="gene-regulatory-networks-grn">Gene Regulatory Networks (GRN)</h1>
+<p>We can define transcriptional machinery by using graphical models called <code>gene regulatory networks</code> (GRN). GRNs are directed graphs that link either <code>proteins -&gt; proteins</code> or <code>proteins -&gt; Transcription Factors (TF)</code> or <code>TFs -&gt; Proteins</code>. Edge types can be categorized by the type of interaction, for instance: </p>
+<ul>
+<li>physical binding between two proteins </li>
+<li>expression activation between a TF and a protein </li>
+<li>expression inhibition between a TF and a protein </li>
+</ul>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/d/dc/DG_Network_in_Hybrid_Rice.png" /></p>
+<p>Image <a href="https://en.wikipedia.org/wiki/Gene_regulatory_network">source</a>. </p>
+<h1 id="drug-target-interactions-dti">Drug-Target Interactions (DTI)</h1>
+<p>The pharmacological model of ligand binding applies to most small molecules used in targeted therapies. In this model we conceptualize a given drug binding to one or more proteins with specificity and varying levels of affinity. The drug presence changes protein structure in a way that modifies the protein's behavior or interactions with other cellular components. </p>
+<h1 id="drug-or-genetic-perturbation-assays">Drug or genetic perturbation assays</h1>
+<p>There are several assays available that measure the gene expression (mRNA or protein) of a cell line before and after exposure to a given perturbagen. These assays have been performed extensively to provide large datasets characterizing the transcriptional and proteomic response to millions of perturbagens (both chemical or genetic). These datasets can, in general be though of as having 3 main components: </p>
+<ul>
+<li>unperturbed gene expression (no drug present)</li>
+<li>perturbed gene expression, measured at time (<span class="arithmatex">\(t\)</span>) </li>
+<li>time (<span class="arithmatex">\(t\)</span>) after introduction of a pertubagen that the gene expression was measured. </li>
+</ul>
+<h1 id="incorporating-grns-dti-and-perturbation-assays-in-a-single-framework">Incorporating GRNs, DTI and perturbation assays in a single framework</h1>
+<p>Gene Regulatory Networks and Drug Target Interactions can be encoded in a heterogenous graph, with nodes consisting of proteins and pertubagens, a simple version of this is visualized in the figure below. Edges may characterize PPI interactions (expression regulation, binding, etc.) or characterize relationships between drugs and proteins (drug targets). </p>
+<p><img alt="" src="../imgs/GRN_overview_slide4.PNG" /></p>
+<p>Considering the dimensionality and complexity of the human interactome, this network in practice would become quite massive: </p>
+<ul>
+<li>20,000+ proteins nodes</li>
+<li>1000-100000 perturbagen nodes </li>
+</ul>
+<p>However, in this model of pertubation - we can further divide individual pertubations into subgraphs that contain only descendents of a single or set of pertubations. See the figure below for an example of individual pertubation subgraphs: </p>
+<p><img alt="" src="../imgs/GRN_problem_overview_subgraphs.gif" /></p>
+<h1 id="predicting-perturbed-expression-using-graph-neural-networks-gnn">Predicting perturbed expression using Graph Neural Networks (GNN)</h1>
+<p>Using these perturbation subgraphs as a framework, we can formulate the prediction of perturbed expression as a <code>node regression</code> task. Node features could be overlaid to characterize the specifics of a given experiment - for instance:</p>
+<ul>
+<li>the concentration of a drug</li>
+<li>a given cell lines genomic or transcriptional properties </li>
+<li>node properties: <ul>
+<li>(drug) chemical SMILES or chemical properies </li>
+<li>(protein) protein amino acid sequence </li>
+</ul>
+</li>
+</ul>
+<p>Global features of the graph might include: </p>
+<ul>
+<li>tissue type </li>
+<li>auxillary experimental conditions (DMSO conc., growth hormones, protocol)</li>
+<li>total drug concentration </li>
+</ul>
+<p>Edge Features might include: </p>
+<ul>
+<li>flux or confidence of a PPI edge </li>
+<li>interaction type </li>
+<li>binding affinity information of a drug-protein edge </li>
+</ul>
+<p>The <strong>dependant variable (y)</strong> that our model will predict is the perturbed expression of a given protein node.</p>
+<p>To effectively learn a function that maps our heterogenous graph and node features to node prediction we suggest using a <code>Graph Neural Network</code> (GNN). </p>
+<h1 id="cell-context-considerations">Cell Context Considerations</h1>
+<p>It is well understood that GRNs vary significantly from tissue to tissue and between cell types. This highlights a need to either: </p>
+<pre><code>A) `Learn context specific edges`   
+B) `Provide context specfic input graphs`   
+C) Learn GNN functions that can mediate context specific behavior based on contextual node features.
+</code></pre>
+<p>Additionally, individual proteins may also have contextually specific features - such as the production and degredation rates of a protein. One standing question is, what features might be predictive of such protein-specific features? Or do we need to learn these features directly from the perturbation data? </p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../01_synth_data/generation/" class="btn btn-neutral float-right" title="Generating a Synthetic Dataset">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../motivation/" class="btn btn-neutral" title="Motivation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2021 Nate Evans</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../motivation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../01_synth_data/generation/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+      <script src="../javascripts/mathjax.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

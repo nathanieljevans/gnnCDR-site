@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>PPI trainable edge weights - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../assets/_mkdocstrings.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "PPI trainable edge weights";
+    var mkdocs_page_input_path = "03_model/ppi_context_edge_weight_decay.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../motivation/">Motivation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../problem_overview/">Problem Overview</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Synthetic Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/generation/">Generating a Synthetic Dataset</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_obj/">The Synthetic gnnCDR Data Object</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_split/">Creating Train/Test/Val Datasets</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Real Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Creating a Global Graph</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/fi_graph/">Functional Interaction Network</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/dti_graph/">Drug-Target Interaction Network</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Exogenous Features</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/overview/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/expression/">Expression</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/mutation/">Mutation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/cnv/">Copy Number Variation (CNV)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/methylation/">Methylation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/gene_dep/">Gene Dependency</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Architecture</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../gnnCDR_arch/">gnnCDR</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../naiveNN_arch/">naiveNN</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../targets_and_metrics/">Choice of Target and Metrics</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">PPI trainable edge weights</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/mkdocs_guides/">Mkdocs Help</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/syntax_examples/">Mkdocs Syntax</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Model Architecture &raquo;</li>
+        
+      
+    
+    <li>PPI trainable edge weights</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="contextual-protein-protein-trainable-edge-weights">Contextual protein-protein trainable edge weights</h1>
+<p>As we've mentioned previously, we recognize that using a shared gene-regulatory network (GRN) or protein-protein interaction (PPI) graph will result in <code>contextually</code> false edges. This is due to the fact that no individual cell type participates in <em>all</em> PPIs. Rather, each celltype has a unique set of PPIs (and likely GRN); However, we are limited in that we do not know cell-type specific GRNs or PPI graphs and therefore have introduced <code>contextual protein-protein trainable edge weights</code>. </p>
+<p>In practice, this is implemented by a linear layer (weight + bias) such that our <code>context</code> features (In synthetic data, this is a one-hot encoded vector specifying the cell model (e.g., "cell line" analog)) selects a unique set of edge weights. ~~We then pass the edge weights into a sigmoid function to scale the edge features between 0,1.~~ </p>
+<p>Our expectation is that our model will be able to learn which edges do not exist (or differences in edge flux), and thereby significantly improve performance <strong>and</strong> predict cell line differences in drug response. We rationalize that including the bias term in this mechanism will allow the model to distinguish edges that do not exist for <em>all</em> cell lines (a.k.a., true false edges). </p>
+<p><img alt="Figure 1" src="../ppi_edge_weights.PNG" /></p>
+<blockquote>
+<p><strong>Figure 1</strong>: Simple depiction of how two cell lines or cell types (X,Y) can have a unique set of edge weights, which we expect to allow for cell type specific drug response. </p>
+</blockquote>
+<p>However, one potential challenge to this approach is <em>overfitting</em> due to high model complexity. As our PPI network grows, so does the number of trainable edge weights we must include and this makes up a significant proportion of the model's overall trainable edge weights. The number of PPI trainable edge weights (n) scale as: </p>
+<div class="arithmatex">\[ n = F*E*(C + 1) \]</div>
+<p>Where <span class="arithmatex">\(F\)</span> is the number of features per edge, <span class="arithmatex">\(E\)</span> is the number of edges, and <span class="arithmatex">\(C\)</span> is the number of cell lines in the model. </p>
+<p>A practical example: when initializing a model to predict outputs on the Ecoli GRN (1556 nodes) synthetic data, with 10 "cell line" models and 1 feature per PPI edge, there are <code>88,352</code> PPI edge features and this makes up ~95% of the total model parameters. </p>
+<p>One assumption we've made for this problem is that the majority of PPI edges are shared across all cell-lines/cell-types and that perhaps 5-10% of the edges differ. As such, we expect useful PPI edge features to be sparse. We considered using an approximate bayesian method, such as variational autoencoder or categorical variables such as the <code>softmax-gumbel</code> method, which would allow us to specify priors on the sparsity of our features; however, for simplicity we opted to use a strong <code>L2</code> penalty on the PPI contextual edge features. </p>
+<p>This PPI penalty can be specified using the <code>edge_wd</code> parameter in the <code>settings.ini</code> file and the PPI edges L2 norm can be retrieved using <code>gnn_cdr.model.GNNCDR.get_ppi_edge_l2()</code>. </p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../pages_usage/mkdocs_guides/" class="btn btn-neutral float-right" title="Mkdocs Help">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../targets_and_metrics/" class="btn btn-neutral" title="Choice of Target and Metrics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2021 Nate Evans</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../targets_and_metrics/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../pages_usage/mkdocs_guides/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+      <script src="../../javascripts/mathjax.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

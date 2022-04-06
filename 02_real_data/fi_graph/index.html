@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Functional Interaction Network - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../assets/_mkdocstrings.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Functional Interaction Network";
+    var mkdocs_page_input_path = "02_real_data/fi_graph.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../motivation/">Motivation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../problem_overview/">Problem Overview</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Synthetic Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/generation/">Generating a Synthetic Dataset</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_obj/">The Synthetic gnnCDR Data Object</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_split/">Creating Train/Test/Val Datasets</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Real Data</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Creating a Global Graph</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Functional Interaction Network</a>
+    <ul class="current">
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../dti_graph/">Drug-Target Interaction Network</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Exogenous Features</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../overview/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../expression/">Expression</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mutation/">Mutation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../cnv/">Copy Number Variation (CNV)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../methylation/">Methylation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../gene_dep/">Gene Dependency</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Architecture</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/gnnCDR_arch/">gnnCDR</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/naiveNN_arch/">naiveNN</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/targets_and_metrics/">Choice of Target and Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/ppi_context_edge_weight_decay/">PPI trainable edge weights</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/mkdocs_guides/">Mkdocs Help</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/syntax_examples/">Mkdocs Syntax</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Real Data &raquo;</li>
+        
+      
+        
+          <li>Creating a Global Graph &raquo;</li>
+        
+      
+    
+    <li>Functional Interaction Network</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="creating-a-global-graph-using-the-reactome-functional-interaction-fi-network">Creating a Global Graph using the Reactome Functional Interaction (FI) network</h1>
+<p>We will create a <code>global graph</code> (e.g., a graph spanning all protein/gene entities; used as parent for individual perturbation subgraphs) using the functional interaction (FI) network provided by (1). The FI network provided by Wu et. al, aims at constructing a pathway-based analysis system. To do this they:   </p>
+<blockquote>
+<p>"Construct a protein functional interaction network by extending curated pathways with non-curated sources of information, including protein-protein interactions, gene coexpression, protein domain interaction, Gene Ontology (GO) annotations and text-mined protein interactions, which cover close to 50% of the human proteome" (1).</p>
+</blockquote>
+<p>More recent database updates have been provided, which has improved the proteome coverage. The data and information can be found <a href="https://reactome.org/download-data">here</a>. We plan to use the most recent version, as of 3/8/22 we are using <code>Version 2021</code>. </p>
+<p>For this network, we make the assumption that each <code>gene</code> -&gt; <code>rna</code> -&gt; <code>protein</code> maps 1:1:1 and therefore we can collapse genes, rna and protein into a single node, which represents the state of all 3. Furthermore, this allows complex edge interactions beyond merely protein-protein interactions or gene regulatory information. </p>
+<h1 id="data-format">Data Format</h1>
+<p>The reactome FI data is provided in the form of edge list with features:</p>
+<ul>
+<li>Annotation: The edge type(s) </li>
+<li>Direction: The edge direction [-,|,&lt;,&gt;]</li>
+<li>Score: Edge confidence, only applicable if the edge is predicted. </li>
+</ul>
+<pre><code>Gene1   Gene2   Annotation                      Direction   Score   Gene1_ensembl   Gene2_ensembl
+16-5-5  CDC42   predicted                       -           0.97    None            ENSG00000070831
+16-5-5  PARD3   predicted                       -           1.00    None            ENSG00000148498
+16-5-5  PARD3B  predicted                       -           1.00    None            ENSG00000116117
+A1CF    APOBEC1 catalyzed by; complex; input    &lt;-          1.00    ENSG00000148584 ENSG00000111701
+A1CF    EP300   expression regulated by         &lt;-          1.00    ENSG00000148584 ENSG00000100393
+</code></pre>
+<p>Top 10 most common edge annotations and directions. As you can see, the edge annotation can include multiple labels. </p>
+<pre><code>Annotation                              Direction       Count
+--------------------------------------------------------------
+complex; input                              -           64959
+predicted                                   -           40443
+complex                                     -           17248
+catalyzed by                                &lt;-          11145
+catalyze                                    -&gt;          9563
+input                                       -           8240
+catalyze; catalyzed by; complex; input      &lt;-&gt;         7707
+activate                                    -&gt;          5658
+activated by                                &lt;-          5558
+catalyze; catalyzed by; input               &lt;-&gt;         5476
+</code></pre>
+<h1 id="network-characteristics">Network Characteristics</h1>
+<p><strong>NOTE</strong>: We filter to the largest connected component. </p>
+<pre><code>Number of Nodes:        13751
+Number of Edges:        257629
+Average Cluster Coef:   0.38
+Network Density:        0.003
+</code></pre>
+<p><img alt="" src="../fi_degree_hist.png" /></p>
+<p><img alt="" src="../fi_edge_score.png" /></p>
+<h1 id="overlap-with-lincs-l1000-platform">Overlap with LINCS L1000 platform</h1>
+<p>Data <a href="https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/instinfo_beta.txt">source</a></p>
+<p>NOTE: for this EDA we use the largest component. </p>
+<p>To understand the overlap between L1000 genes and Reactome FI entities, we map the overlapping sets and compare. The L1000 dataset has 3 data subsets: </p>
+<blockquote>
+<p><strong>landmark</strong>: ~1000 genes RNA abundance explictly measured using a Luminex bead assay, more info <a href="https://lincsproject.org/LINCS/tools/workflows/find-the-best-place-to-obtain-the-lincs-l1000-data">here</a>.   </p>
+<p><strong>inferred</strong>: ~2000 genes with inferred RNA abundance, but not apart of the <code>best inferred</code> subset. Lower accuracy estimates.   </p>
+<p><strong>best infered</strong>: ~9000 genes with high confidence inferred RNA abundance.   </p>
+</blockquote>
+<p>To map genes between <code>reactome FI</code> and <code>LINCS L1000</code> genes, we use ensembl gene identifiers - which does not have perfect mapping (e.g., we lose some genes in mapping from XXX -&gt; enesmbl).</p>
+<pre><code>
+############ landmark #############
+# of lincs genes dropped in ensembl mapping: 10
+# of reactome genes dropped in ensembl mapping: 344
+# lincs genes: 968
+# reactome genes: 13609
+# overlapping genes (lincs &amp; reactome) 837
+     percentage of reactome:  6.2
+     percentage of lincs:     86.5
+
+############ best inferred #############
+# of lincs genes dropped in ensembl mapping: 129
+# of reactome genes dropped in ensembl mapping: 344
+# lincs genes: 9067
+# reactome genes: 13609
+# overlapping genes (lincs &amp; reactome) 7394
+     percentage of reactome:  54.3
+     percentage of lincs:     81.5
+
+############ all #############
+# of lincs genes dropped in ensembl mapping: 187
+# of reactome genes dropped in ensembl mapping: 344
+# lincs genes: 12140
+# reactome genes: 13609
+# overlapping genes (lincs &amp; reactome) 9808
+     percentage of reactome:  72.1
+     percentage of lincs:     80.8
+</code></pre>
+<h1 id="overlap-with-clue-compound-information">Overlap with CLUE compound information</h1>
+<p>Data <a href="https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/compoundinfo_beta.txt">source</a>, More information can be found <a href="https://clue.io/repurposing">here</a>. </p>
+<p>To ensure that we have drug -&gt; protein overlap in our reactome FI graph we convert all protein targets from the CLUE compound information dataset to ensembl genes and compare the overlap in reactome FI network. </p>
+<pre><code># NA target observations (filtered):        31275
+# of targets without ensembl id:            1
+# of targets not in reactome FI network:    181
+# of targets in reactome FI network:        7864
+# of drugs in reactome FI network:          3109
+# of unique drugs targets in FI network:    836 
+</code></pre>
+<p>Of note, <code>cmap_name</code> is not a 1:1 mapping with <code>pert_id</code>. </p>
+<h1 id="edge-annotation-feature-encoding">Edge Annotation Feature Encoding</h1>
+<p>Word annotation features are encoded as binary variable word presences, e.g., if a word is present in the annotation, then that label has a 1 value, otherwise 0. </p>
+<p>NOTE: this is "hot-encoding" but not "one-hot encoding"; edges can have multiple annotations.</p>
+<p>example:</p>
+<pre><code>edge annotation:    &quot;catalyzed by; complex; input&quot;  
+annot. word list:   ['catalyzed', 'complex', 'input', 'random']   
+edge feature:       [1,1,1,0] 
+</code></pre>
+<p>See below a the edge annotation word list and respective word frequencies across all edges in the FI network. </p>
+<pre><code>word label -------------------- Frequency % (across all edges)
+__________________________________________________________
+methylation ------------------- 0.0019
+glycosylation ----------------- 0.0037
+glycosylated ------------------ 0.0044
+dephosphorylated -------------- 0.0063
+state ------------------------- 0.0102
+change ------------------------ 0.0102
+repression -------------------- 0.0183
+repressed --------------------- 0.0197
+ubiquitinated ----------------- 0.0348
+interaction ------------------- 0.0565
+dissociation ------------------ 0.0655
+ubiquitination ---------------- 0.0911
+PCrel ------------------------- 0.2602
+dephosphorylation ------------- 0.3221
+phosphorylated ---------------- 0.5218
+inhibition -------------------- 0.9153
+ECrel ------------------------- 0.9411
+effect ------------------------ 1.0804
+indirect ---------------------- 1.0912
+GErel ------------------------- 1.1847
+compound ---------------------- 1.2137
+regulates --------------------- 1.3004
+regulated --------------------- 1.4183
+phosphorylation --------------- 1.6001
+binding/association ----------- 2.4961
+inhibited --------------------- 2.8101
+activation -------------------- 2.8267
+reaction ---------------------- 3.4820
+inhibite ---------------------- 3.4847
+expression -------------------- 3.7661
+inhibit ----------------------- 4.9503
+activated --------------------- 5.7617
+activate ---------------------- 8.9841
+PPrel ------------------------- 10.2082
+catalyzed --------------------- 10.3590
+catalyze ---------------------- 14.3489
+predicted --------------------- 19.7095
+input ------------------------- 47.3727
+complex ----------------------- 49.8622
+</code></pre>
+<h1 id="edge-direction-encoding">Edge Direction Encoding</h1>
+<p>Our network is set up as a directed network and edge directionality is intended to be primarily specified by this mechanism. For bi-directional edges ('-' or '&lt;-&gt;'), two opposing edges are included in our network. For some more complex edge annotations and directions (e.g., multiple edge annotations or alternate-type bi-directionality), encoding edge direction may be a useful feature. To do this, we will create 2 features that can have the possible values [-1,0,1]. </p>
+<p>Edge directions can be though of as 3 element string: </p>
+<blockquote>
+<p><code>left_char</code>, <code>center_char</code>, <code>right_char</code> </p>
+</blockquote>
+<p><code>center_char</code> is always '-' and therefore unnecessary to encode <br />
+<code>left_char</code> can be "|" (-1) or "&lt;" (1) or neither (0), this will be the first feature <br />
+<code>right_char</code> can be "|" (-1) or "&gt;" (1) or neither (0), this will be the second feature   </p>
+<p>The <code>edge direction</code> strings used in reactome FI network. </p>
+<pre><code>Direction   |       Count   |   feature
+---------------------------------------
+-           |      144182   |   [0,0]
+&lt;-          |      40858    |   [1,0]
+-&gt;          |      39438    |   [0,1]
+&lt;-&gt;         |      13177    |   [1,1]
+|-          |      5499     |   [-1,0]
+-|          |      4690     |   [0,-1]
+|-&gt;         |      1454     |   [-1,1]
+&lt;-|         |      1107     |   [1,-1]
+|-|         |      79       |   [-1,-1]
+
+</code></pre>
+<h1 id="implementation">Implementation</h1>
+<p>The reactome FI network can be constructed by: </p>
+<pre><code class="language-python">edge_index, edge_attr, nodelist, annot_words = gnn_cdr.reactomefi.create_reactome_fi_graph()
+</code></pre>
+<h1 id="references">References</h1>
+<ol>
+<li>Wu, G., Feng, X. &amp; Stein, L. A human functional protein interaction network and its application to cancer data analysis. Genome Biol 11, R53 (2010). https://doi.org/10.1186/gb-2010-11-5-r53</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../dti_graph/" class="btn btn-neutral float-right" title="Drug-Target Interaction Network">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../01_synth_data/data_split/" class="btn btn-neutral" title="Creating Train/Test/Val Datasets"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2021 Nate Evans</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../01_synth_data/data_split/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../dti_graph/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+      <script src="../../javascripts/mathjax.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

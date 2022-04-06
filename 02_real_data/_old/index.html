@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Encoding Options - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../assets/_mkdocstrings.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Encoding Options";
+    var mkdocs_page_input_path = "02_real_data/_old.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../motivation/">Motivation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../problem_overview/">Problem Overview</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Synthetic Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/generation/">Generating a Synthetic Dataset</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_obj/">The Synthetic gnnCDR Data Object</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_split/">Creating Train/Test/Val Datasets</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Real Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Creating a Global Graph</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../fi_graph/">Functional Interaction Network</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../dti_graph/">Drug-Target Interaction Network</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Exogenous Features</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../overview/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../expression/">Expression</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mutation/">Mutation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../cnv/">Copy Number Variation (CNV)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../methylation/">Methylation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../gene_dep/">Gene Dependency</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Architecture</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/gnnCDR_arch/">gnnCDR</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/naiveNN_arch/">naiveNN</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/targets_and_metrics/">Choice of Target and Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/ppi_context_edge_weight_decay/">PPI trainable edge weights</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/mkdocs_guides/">Mkdocs Help</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/syntax_examples/">Mkdocs Syntax</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Encoding Options</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="encoding-options">Encoding Options</h1>
+<p>First 5 rows of our pandas dataframe. </p>
+<pre><code>ensembl         cell_iname      Variant_Classification  Variant_Type    Variant_annotation  isDeleterious
+ENSG00000008128     HL60        Missense_Mutation       SNP             other non-conserving    False
+ENSG00000142611     HL60        Missense_Mutation       SNP             other non-conserving    False
+ENSG00000179163     HL60        Missense_Mutation       SNP             other non-conserving    False
+ENSG00000126705     HL60        Missense_Mutation       SNP             other non-conserving    False
+ENSG00000162526     HL60        Silent                  SNP             silent                  False
+</code></pre>
+<h2 id="feature-cga_wes_ac">Feature: <code>CGA_WES_AC</code></h2>
+<blockquote>
+<p>For all columns with AC, the allelic ratio is presented as [ALTERNATE:REFERENCE].</p>
+</blockquote>
+<p>CGA_WES_AC: the allelic ratio for this variant in all our WES/WGS(exon only) using a cell line adapted version of the 2019 CGA pipeline that includes germline filtering. <a href="https://depmap.org/portal/download/?releasename=DepMap+Public+22Q1&amp;filename=CCLE_mutations.csv">source</a>.</p>
+<p>22% of observations have NA values for this feature. </p>
+<p><img alt="" src="../CGA_WES_AC_dist.png" /></p>
+<h2 id="feature-variant_classification">Feature: <code>Variant_Classification</code></h2>
+<blockquote>
+<p>Translational effect of variant allele <a href="https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/">source</a></p>
+</blockquote>
+<pre><code>Variant_Classification          count
+Missense_Mutation               123884
+Silent                          53541
+Frame_Shift_Del                 11449
+Splice_Site                     8215
+Nonsense_Mutation               7608
+Frame_Shift_Ins                 5298
+In_Frame_Del                    1014
+De_novo_Start_OutOfFrame        826
+In_Frame_Ins                    224
+Start_Codon_SNP                 196
+Nonstop_Mutation                149
+Intron                          116
+IGR                             39
+Stop_Codon_Del                  34
+Stop_Codon_Ins                  22
+5'Flank                         19
+Start_Codon_Del                 17
+5'UTR                           13
+3'UTR                           13
+Start_Codon_Ins                 9
+</code></pre>
+<h2 id="feature-variant_annotation">Feature: <code>Variant_annotation</code></h2>
+<blockquote>
+<p>No Depmap information available on this feature. </p>
+</blockquote>
+<p><a href="https://www.biostars.org/p/9481609/">This</a> biostars thread offers some insight: </p>
+<blockquote>
+<p>[<strong>A. Domingues</strong>] "Got the answer in the Forum of DepMap (closed access). I am pasting here the crucial part of the answer. If any one from DepMap has an issue with it, I am happy to remove it:</p>
+<blockquote>
+<p><em>We use Oncotator to annotate the mutations. The output of this tool is stored in the ‘Variant_Classification’ column of the mutation maf file The Variant_annotation column in the CCLE_mutations.csv MAF file</em></p>
+<p><em>We have added a Variant_annotation column in the DepMap mutation data, CCLE_mutations.csv 4, which groups mutations using more inclusive definitions. The Variant_annotation column labels a mutation as “damaging”, “other non-conserving”, “other conserving” or “silent” using the Variant_Classification column and the definitions below."</em></p>
+</blockquote>
+</blockquote>
+<p><code>Oncotator</code> information <a href="https://software.broadinstitute.org/cancer/cga/oncotator">here</a>.</p>
+<pre><code>Variation               count
+other non-conserving    125327
+silent                  53541
+damaging                33618
+other conserving        200
+</code></pre>
+<h2 id="feature-variant_type">Feature: <code>Variant_Type</code></h2>
+<blockquote>
+<p>Type of mutation. TNP (tri-nucleotide polymorphism) is analogous to DNP (di-nucleotide polymorphism) but for three consecutive nucleotides. ONP (oligo-nucleotide polymorphism) is analogous to TNP but for consecutive runs of four or more (SNP, DNP, TNP, ONP, INS, DEL, or Consolidated) <a href="https://docs.gdc.cancer.gov/Data/File_Formats/MAF_Format/">source</a></p>
+</blockquote>
+<pre><code>Variant_Type    count
+SNP             193588
+DEL             13119
+INS             5907
+DNP             72
+</code></pre>
+<h2 id="feature-isdeleterious">Feature: <code>isDeleterious</code></h2>
+<blockquote>
+<p>No DepMap information available on this feature</p>
+</blockquote>
+<p>This appears to be outdated, and "Variant_annotation" is suggested for replacement information. See this <a href="https://forum.depmap.org/t/how-is-the-isdeleterious-column-in-the-ccle-mutations-csv-file-determined/129">thread</a>. </p>
+<pre><code>isDeleterious   count
+0   False   178872
+1   True    33814
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2021 Nate Evans</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+      <script src="../../javascripts/mathjax.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

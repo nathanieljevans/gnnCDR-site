@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Generating a Synthetic Dataset - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../assets/_mkdocstrings.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Generating a Synthetic Dataset";
+    var mkdocs_page_input_path = "01_synth_data/generation.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../motivation/">Motivation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../problem_overview/">Problem Overview</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Synthetic Data</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Generating a Synthetic Dataset</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../data_obj/">The Synthetic gnnCDR Data Object</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../data_split/">Creating Train/Test/Val Datasets</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Real Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Creating a Global Graph</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/fi_graph/">Functional Interaction Network</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/dti_graph/">Drug-Target Interaction Network</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Exogenous Features</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/overview/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/expression/">Expression</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/mutation/">Mutation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/cnv/">Copy Number Variation (CNV)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/methylation/">Methylation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/gene_dep/">Gene Dependency</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Architecture</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/gnnCDR_arch/">gnnCDR</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/naiveNN_arch/">naiveNN</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/targets_and_metrics/">Choice of Target and Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/ppi_context_edge_weight_decay/">PPI trainable edge weights</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/mkdocs_guides/">Mkdocs Help</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../pages_usage/syntax_examples/">Mkdocs Syntax</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Synthetic Data &raquo;</li>
+        
+      
+    
+    <li>Generating a Synthetic Dataset</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="synthetic-data-model">Synthetic Data Model</h1>
+<p>We use the <a href="https://pubmed.ncbi.nlm.nih.gov/21697125/"><code>GeneNetWeaver</code></a> package to simulate synthetic data</p>
+<p><img alt="" src="../../imgs/gnw_overview.PNG" />
+<strong>Figure 1</strong>: GeneNetWeaver graphic from the original paper. We focus on package elements illustrated by section B. <a href="https://academic.oup.com/bioinformatics/article/27/16/2263/254752">source</a>.</p>
+<p>To simulate data for initial model training and evaluation, we have extended the <a href="https://pubmed.ncbi.nlm.nih.gov/21697125/"><code>GeneNetWeaver</code></a> package <a href="#references">(1)</a>, which uses ordinary differential equations (ODEs) built from a gene regulatory network (GRN) to simulate bulk mRNA gene expression under a variety of conditions. GNW outputs include: </p>
+<ol>
+<li>cell line steady state gene expression in the absence of any perturbation and </li>
+<li>gene expression time series after the introduction of genetic or chemical perturbation. </li>
+</ol>
+<p>GNW uses ODEs of the form: </p>
+<div class="arithmatex">\[ \frac{dx_i}{dt} = m_i f_i(y) - \lambda_i^{RNA}  x_i \]</div>
+<div class="arithmatex">\[ \frac{dy_i}{dt} = r_i x_i - \lambda_i^{PROT} y_i \]</div>
+<p>Where <span class="arithmatex">\(x_i\)</span> is RNA gene expression. <span class="arithmatex">\(y_i\)</span> is protein abundance. <span class="arithmatex">\(m_i\)</span> and <span class="arithmatex">\(r_i\)</span> are production rates.<span class="arithmatex">\(f_i(y)\)</span> is a function of transcription factor activation and <span class="arithmatex">\(\lambda\)</span> represents respective degradation rates. Subscript <span class="arithmatex">\(i\)</span> represents the respective gene index. </p>
+<p>Building upon the GNW method, we simulate knockout’s (KO) by setting  to zero, knockdown’s (KD) by setting  to half its original value and over-expression (OE) by setting  to twice it’s original value. Chemical perturbations are simulated by randomly sampling a set of gene targets and respective dissociation constants and modifying the target gene values according to the equation: </p>
+<div class="arithmatex">\[ m_i^{perturbed} = m_i \pm \frac{m_i}{1+\frac{k_d}{c}} \]</div>
+<p>Where <span class="arithmatex">\(k_d\)</span> represents dissociation constant and c is concentration in micro-molars. We simulate multi-drug combinations by modifying the union of drug targets. Drug target collisions are handled by either... </p>
+<p>Same drug types (2-agent combination):
+$$ m_i^{perturberd} = m \pm m_i * \frac{c_1}{c_1 + k_{d,1}(1 + \frac{c_2}{k_{d,2}})} $$ </p>
+<p>Different drug types (2-agent combination):
+$$ m_i^{perturberd} = \frac{m_i^{agonist} + m_i^{inhibitor}}{2}  $$</p>
+<p>We note the accepted scientific premise of pharmacological binding is that a drug binds to protein and stabilizes an active or inactive conformation. This premise suggests that a logical extension would be the modification of protein abundance  or transcription factor activation; However, in practice we find that our approach to drug simulation creates reasonable outputs and captures many aspects of true drug perturbation behavior. </p>
+<p>Different cell contexts (such as cell type, patient, disease, etc.) have varying GRNs, which result in unique expression steady states and perturbation response. To emulate this behavior, we simulate each cellular context by creating a similar - but distinct – GRN prior to GNW simulation. Cellular context GRNs are created by randomly removing a subset of edges from the original parent GRN. This modified GRN becomes input to the GNW simulation. </p>
+<p>This work provides a tool for simulating the LINCS L1000 datatypes. Importantly, the data produced by this method is mediated by an underlying GRN, which makes graph-based methods uniquely suited to modeling the data. </p>
+<h1 id="generating-synthetic-data">Generating Synthetic Data</h1>
+<p>For a detailed walk-through of synthetic data pipeline, see <code>gnnCDR/examples/gnw_tutorial.ipynb</code> </p>
+<h2 id="settings">Settings</h2>
+<p>Modify the local <code>settings.txt</code> file, which <em>must</em> be stored in the <code>.../gnnCDR/gnn_cdr/gnw/gnw/settings.txt</code></p>
+<p>The relevant parameters to modify include... </p>
+<pre><code class="language-bash"># ideal-waddle Relevant parameters
+
+# Default max duration time in time-series experiments (must be consistent with numTimePoints_ and dt_)
+maxtTimeSeries = 500
+
+# Time step for the time series (numTimePoints_ = (int) Math.round(maxtTimeSeries/dt) + 1)
+dt = 50
+
+# Number of cell line models to create (n-1 single gene KO models + original)
+n_cell_lines = 10
+
+# probability of edge removal when making cell line models
+prob_remove = 0.1
+
+# Graph name to use as base PPI network # InSilicoSize100-Ecoli1.tsv
+graph_name = InSilicoSize100-Ecoli1.tsv
+
+# Number of agonist drugs to create 
+num_agonists = 5
+
+# Number of inhibitor drugs to create
+num_inhibitors = 5
+
+# minimum concentration to use for drug simulations, intended to be in units log10(uM)
+min_log_conc = -5
+
+# max conc &quot;&quot;&quot; 
+max_log_conc = 1 
+
+# number of concentrations to simulate, spread evenly from min_log_conc to max_log_conc on a log scale 
+num_dose_pts = 5
+
+# The expectation (mean) of the number of targets each drug has. Targets are assigned probabalistically so some will have more and some will have fewer.
+expected_targs = 2
+
+# minimum dissociation constant (kd) value to assign to drug targets (units of log(uM))
+min_kd = -3
+
+# max binding affinity 
+max_kd = 0
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p>To simulate data and produce the desired hdf5 file, first update the <code>settings.txt</code> file found in <code>gnn_cdr/gnw/gnw/</code> to reflect your desired parameters. Next, navigate to the <code>scripts</code> directory and run: </p>
+<pre><code class="language-bash">(gnnCDR) $ python create_synthetic_data.py --gnw_cwd ../gnn_cdr/gnw/gnw/ --out ../synthetic_data.h5
+</code></pre>
+<p>For command line options, use <code>--help</code>. </p>
+<h2 id="output">Output</h2>
+<p>The resulting <code>hdf5</code> file will have the following general structure: </p>
+<pre><code class="language-bash">##################################################
+Printing HDF5 output structure.
+##################################################
+
+baseline
+         &lt;HDF5 dataset &quot;cell_lines&quot;: shape (25,), type &quot;|S12&quot;&gt;
+         &lt;HDF5 dataset &quot;expr&quot;: shape (25, 100), type &quot;&lt;f8&quot;&gt;
+graphs
+         PPI
+                 &lt;HDF5 dataset &quot;edge_attr&quot;: shape (125, 2), type &quot;&lt;f8&quot;&gt;
+                 &lt;HDF5 dataset &quot;edge_index&quot;: shape (2, 125), type &quot;&lt;i4&quot;&gt;
+                 &lt;HDF5 dataset &quot;edge_labels&quot;: shape (2,), type &quot;|O&quot;&gt;
+         PTI
+                 &lt;HDF5 dataset &quot;binding_affinity&quot;: shape (120,), type &quot;&lt;f8&quot;&gt;
+                 &lt;HDF5 dataset &quot;edge_attr&quot;: shape (120, 5), type &quot;&lt;i8&quot;&gt;
+                 &lt;HDF5 dataset &quot;edge_index&quot;: shape (2, 120), type &quot;&lt;i8&quot;&gt;
+                 &lt;HDF5 dataset &quot;edge_labels&quot;: shape (5,), type &quot;|O&quot;&gt;
+labels
+         &lt;HDF5 dataset &quot;drug_names&quot;: shape (88,), type &quot;|S11&quot;&gt;
+         &lt;HDF5 dataset &quot;gene_names&quot;: shape (100,), type &quot;|S4&quot;&gt;
+meta
+         cell_models
+                 &lt;HDF5 dataset &quot;cell_line_0&quot;: shape (9, 2), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;cell_line_1&quot;: shape (10, 2), type &quot;|S3&quot;&gt;
+                 ...
+                 &lt;HDF5 dataset &quot;cell_line_8&quot;: shape (7, 2), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;cell_line_9&quot;: shape (5, 2), type &quot;|S3&quot;&gt;
+         &lt;HDF5 dataset &quot;cell_models_info&quot;: shape (1,), type &quot;|S54&quot;&gt;
+         &lt;HDF5 dataset &quot;creation_date&quot;: shape (), type &quot;|O&quot;&gt;
+         edgelist
+                 &lt;HDF5 dataset &quot;annot&quot;: shape (125,), type &quot;|S1&quot;&gt;
+                 &lt;HDF5 dataset &quot;from&quot;: shape (125,), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;to&quot;: shape (125,), type &quot;|S4&quot;&gt;
+         &lt;HDF5 dataset &quot;settings&quot;: shape (), type &quot;|O&quot;&gt;
+perts
+         &lt;HDF5 dataset &quot;cell_line&quot;: shape (344850,), type &quot;|S12&quot;&gt;
+         &lt;HDF5 dataset &quot;conc_um&quot;: shape (344850,), type &quot;|S46&quot;&gt;
+         &lt;HDF5 dataset &quot;expr&quot;: shape (344850, 100), type &quot;&lt;f8&quot;&gt;
+         &lt;HDF5 dataset &quot;pert_kd&quot;: shape (344850,), type &quot;|S260&quot;&gt;
+         &lt;HDF5 dataset &quot;pert_name&quot;: shape (344850,), type &quot;|S24&quot;&gt;
+         &lt;HDF5 dataset &quot;pert_targ&quot;: shape (344850,), type &quot;|S58&quot;&gt;
+         &lt;HDF5 dataset &quot;pert_type&quot;: shape (344850,), type &quot;|S20&quot;&gt;
+         &lt;HDF5 dataset &quot;time&quot;: shape (344850,), type &quot;&lt;f8&quot;&gt;
+</code></pre>
+<h2 id="output-pca">Output PCA</h2>
+<p><img alt="" src="../synth_pca_01.png" /></p>
+<p>(left) Colored by <code>cell context</code> (middle) colored by perturbation type, filtered to genetic perturbations only. (right) colored by time.</p>
+<h1 id="generating-synthetic-data-splits">Generating synthetic data splits</h1>
+<p>To create test/train/val splits, use the script: </p>
+<pre><code class="language-bash">
+python create_data_splits.py --data ../data/synthetic_data.h5 --out ../output/ --prop 0.7
+
+</code></pre>
+<p>See <code>$ python create_data_splits --help</code> for command line options.</p>
+<h1 id="creating-traintestval-datasets">Creating train/test/val datasets</h1>
+<p>The last step before we can move on to model training is to do the necessary pre-processing and create data splits. This can be done with: </p>
+<pre><code class="language-bash">
+$ python SynthDataPreprocessing.py --input ../data/synthetic_data.h5 --output ../data/synthetic_data_PREPROC.h5
+
+</code></pre>
+<p>See <code>$ python SynthDataPreprocessing.py</code> --help for command line options</p>
+<p>This will produce a <code>.h5</code> file with the following structure: </p>
+<pre><code>cell_model
+         GRN_removed_edges
+                 &lt;HDF5 dataset &quot;cell_line_0&quot;: shape (6, 2), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;cell_line_1&quot;: shape (9, 2), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;cell_line_2&quot;: shape (8, 2), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;cell_line_3&quot;: shape (5, 2), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;cell_line_4&quot;: shape (12, 2), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;cell_line_5&quot;: shape (10, 2), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;cell_line_6&quot;: shape (5, 2), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;cell_line_7&quot;: shape (10, 2), type &quot;|S3&quot;&gt;
+                 &lt;HDF5 dataset &quot;cell_line_8&quot;: shape (6, 2), type &quot;|S3&quot;&gt;
+         &lt;HDF5 dataset &quot;labels&quot;: shape (10,), type &quot;|S11&quot;&gt;
+         &lt;HDF5 dataset &quot;onehot&quot;: shape (137940, 10), type &quot;&lt;f4&quot;&gt;
+global_graph
+         KD
+                 &lt;HDF5 dataset &quot;node_names&quot;: shape (26,), type &quot;|S6&quot;&gt;
+                 targets
+                         protein
+                                 &lt;HDF5 dataset &quot;edge_index&quot;: shape (2, 26), type &quot;&lt;i8&quot;&gt;
+         KO
+                 &lt;HDF5 dataset &quot;node_names&quot;: shape (26,), type &quot;|S6&quot;&gt;
+                 targets
+                         protein
+                                 &lt;HDF5 dataset &quot;edge_index&quot;: shape (2, 26), type &quot;&lt;i8&quot;&gt;
+         OE
+                 &lt;HDF5 dataset &quot;node_names&quot;: shape (26,), type &quot;|S6&quot;&gt;
+                 targets
+                         protein
+                                 &lt;HDF5 dataset &quot;edge_index&quot;: shape (2, 26), type &quot;&lt;i8&quot;&gt;
+         agonist
+                 &lt;HDF5 dataset &quot;node_names&quot;: shape (5,), type &quot;|S9&quot;&gt;
+                 targets
+                         protein
+                                 &lt;HDF5 dataset &quot;edge_index&quot;: shape (2, 7), type &quot;&lt;i8&quot;&gt;
+         inhibitor
+                 &lt;HDF5 dataset &quot;node_names&quot;: shape (5,), type &quot;|S11&quot;&gt;
+                 targets
+                         protein
+                                 &lt;HDF5 dataset &quot;edge_index&quot;: shape (2, 18), type &quot;&lt;i8&quot;&gt;
+         protein
+                 activates
+                         protein
+                                 &lt;HDF5 dataset &quot;edge_index&quot;: shape (2, 66), type &quot;&lt;i8&quot;&gt;
+                 inhibits
+                         protein
+                                 &lt;HDF5 dataset &quot;edge_index&quot;: shape (2, 59), type &quot;&lt;i8&quot;&gt;
+                 &lt;HDF5 dataset &quot;node_names&quot;: shape (100,), type &quot;|S4&quot;&gt;
+pert
+         &lt;HDF5 dataset &quot;conc_um&quot;: shape (137940,), type &quot;|S46&quot;&gt;
+         &lt;HDF5 dataset &quot;pert_name&quot;: shape (137940,), type &quot;|S24&quot;&gt;
+         &lt;HDF5 dataset &quot;pert_type&quot;: shape (137940,), type &quot;|S20&quot;&gt;
+protein
+         &lt;HDF5 dataset &quot;x&quot;: shape (137940, 100), type &quot;&lt;f8&quot;&gt;
+         &lt;HDF5 dataset &quot;y&quot;: shape (137940, 100), type &quot;&lt;f8&quot;&gt;
+time
+         &lt;HDF5 dataset &quot;max_time&quot;: shape (), type &quot;&lt;f8&quot;&gt;
+         &lt;HDF5 dataset &quot;time&quot;: shape (137940,), type &quot;&lt;f8&quot;&gt;
+</code></pre>
+<h1 id="references">References</h1>
+<ol>
+<li>Schaffter T, Marbach D, Floreano D. GeneNetWeaver: in silico benchmark generation and performance profiling of network inference methods. Bioinformatics. 2011 Aug 15;27(16):2263-70. doi: 10.1093/bioinformatics/btr373. Epub 2011 Jun 22. PMID: 21697125.</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../data_obj/" class="btn btn-neutral float-right" title="The Synthetic gnnCDR Data Object">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../problem_overview/" class="btn btn-neutral" title="Problem Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2021 Nate Evans</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../problem_overview/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../data_obj/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+      <script src="../../javascripts/mathjax.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
