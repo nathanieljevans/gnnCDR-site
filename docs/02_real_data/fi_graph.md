@@ -188,24 +188,28 @@ Edge directions can be though of as 3 element string:
 
 > `left_char`, `center_char`, `right_char` 
 
-`center_char` is always '-' and therefore unnecessary to encode   
-`left_char` can be "|" (-1) or "<" (1) or neither (0), this will be the first feature   
-`right_char` can be "|" (-1) or ">" (1) or neither (0), this will be the second feature   
+`center_char` is always '-' and therefore unnecessary to encode  
+
+We treat edges like <-> as bi-directional (e.g., we create two edges A->B and B->A), we only need to encode the right_char (since we create a reverse edge with reverse direction). This is intended to capture distinct behavior, such as: 
+
+> `A |-> B` becomes two edges: 1) `A -> B` and 2) `B -| A`  
+    
+`right_char` can be "|" (-1) or ">" (1) or neither (0), this will be the ONLY directional feature.  
 
 The `edge direction` strings used in reactome FI network. 
 
 ```
-Direction   |       Count   |   feature
----------------------------------------
--	        |      144182	|	[0,0]
-<-	        |      40858	|	[1,0]
-->	        |      39438	| 	[0,1]
-<->	        |      13177	| 	[1,1]
-|-	        |      5499		| 	[-1,0]
--|	        |      4690		| 	[0,-1]
-|->	        |      1454		|	[-1,1]
-<-|	        |      1107		|	[1,-1]
-|-|	        |      79		|	[-1,-1]
+Direction   |       Count   |   feature		| 	rev. feature	| 
+-----------------------------------------------------------------
+-	        |      144182	|	[0]			|	[0]				|
+<-	        |      40858	|	[0]			|	[1]				|
+->	        |      39438	| 	[1]			|	[0]				| 
+<->	        |      13177	| 	[1]			|	[1]				| 
+|-	        |      5499		| 	[0]			| 	[-1]			|
+-|	        |      4690		| 	[-1]		| 	[0]				| 
+|->	        |      1454		|	[1]			| 	[-1]			| 
+<-|	        |      1107		|	[-1]		| 	[1]				| 
+|-|	        |      79		|	[-1]		|	[-1]			| 		
 
 ```
 
@@ -216,6 +220,14 @@ The reactome FI network can be constructed by:
 ```python
 edge_index, edge_attr, nodelist, annot_words = gnn_cdr.reactomefi.create_reactome_fi_graph()
 ```
+
+`edge_attr` will be returned in shape (E, 41), where the features will can be described as:   
+
+(NOTE: assumes there are 39 words in `annot_words`)  
+
+- 0-38 -> edge annotation labels (0,1)  
+- 39 -> direction label (-1,0,1)  
+- 40 -> edge score [0,1]  
 
 # References 
 

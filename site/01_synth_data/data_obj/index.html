@@ -20,7 +20,7 @@
   <script>
     // Current page data
     var mkdocs_page_name = "The Synthetic gnnCDR Data Object";
-    var mkdocs_page_input_path = "synth_data/data_obj.md";
+    var mkdocs_page_input_path = "01_synth_data/data_obj.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -51,6 +51,14 @@
                     <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
                     </li>
                 </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../motivation/">Motivation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../problem_overview/">Problem Overview</a>
+                    </li>
+                </ul>
                 <p class="caption"><span class="caption-text">Synthetic Data</span></p>
                 <ul class="current">
                     <li class="toctree-l1"><a class="reference internal" href="../generation/">Generating a Synthetic Dataset</a>
@@ -60,6 +68,44 @@
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../data_split/">Creating Train/Test/Val Datasets</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Real Data</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Creating a Global Graph</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/fi_graph/">Functional Interaction Network</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/dti_graph/">Drug-Target Interaction Network</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Exogenous Features</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/overview/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/expression/">Expression</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/mutation/">Mutation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/cnv/">Copy Number Variation (CNV)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/methylation/">Methylation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../02_real_data/gene_dep/">Gene Dependency</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Model Architecture</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/gnnCDR_arch/">gnnCDR</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/naiveNN_arch/">naiveNN</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/targets_and_metrics/">Choice of Target and Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../03_model/ppi_context_edge_weight_decay/">PPI trainable edge weights</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">User Guide</span></p>
@@ -117,14 +163,16 @@
 <li>KD (knockdown) </li>
 <li>OE (overexpression)</li>
 </ul>
-<p>and 7 edge types: 
-- (agonist, targets, protein)
-- (inhibitor, targets, protein)
-- (KO, targets, protein)
-- (KD, targets, protein)
-- (OE, targets, protein)
-- (protein, activates, protein)
-- (protein, inhibits, protein)</p>
+<p>and 7 edge types:  </p>
+<ul>
+<li>(agonist, targets, protein)  </li>
+<li>(inhibitor, targets, protein)  </li>
+<li>(KO, targets, protein)  </li>
+<li>(KD, targets, protein)  </li>
+<li>(OE, targets, protein)  </li>
+<li>(protein, activates, protein)  </li>
+<li>(protein, inhibits, protein)  </li>
+</ul>
 <p>The genetic nodes do not have any node attributes and only target a single protein. The chemical perturbations have concentration node attributes (<code>conc</code>) and can target multiple protein nodes. Protein-protein edges can be of two types: "activate" and "inhibit". This is illustrated in figure 1 below. </p>
 <p><img alt="" src="../synth_data_graph_obj.PNG" />
 <strong>Figure 1</strong>: Graphic of our HeteroData object. </p>

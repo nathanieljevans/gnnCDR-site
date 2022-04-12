@@ -30,8 +30,10 @@ nav:
 - 'Model Architecture': 
   - 'gnnCDR': ./03_model/gnnCDR_arch.md
   - 'naiveNN': ./03_model/naiveNN_arch.md
-  - 'Choice of Target and Metrics': './03_model/targets_and_metrics.md'  
-  - 'PPI trainable edge weights': './03_model/ppi_context_edge_weight_decay.md'
+  - 'Choice of Target and Metrics': ./03_model/targets_and_metrics.md 
+  - 'PPI trainable edge weights': ./03_model/ppi_context_edge_weight_decay.md 
+- 'Parking Lot': 
+  - 'Predicting Cell Viability': ./04_parking_lot/prism.md 
 
 - 'User Guide': 
   - 'Mkdocs Help': pages_usage/mkdocs_guides.md
@@ -48,6 +50,4 @@ markdown_extensions:
       generic: true
   
 plugins:
-      - search
-      - mkdocstrings
-      - table-reader
+  - search
