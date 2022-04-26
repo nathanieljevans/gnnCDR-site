@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Creating Train/Test/Val Datasets - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
+    <title>Predicting Cell Viability - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Creating Train/Test/Val Datasets";
-        var mkdocs_page_input_path = "01_synth_data/data_split.md";
+        var mkdocs_page_name = "Predicting Cell Viability";
+        var mkdocs_page_input_path = "04_parking_lot/prism.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -53,14 +53,12 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Synthetic Data</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../generation/">Generating a Synthetic Dataset</a>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/generation/">Generating a Synthetic Dataset</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../data_obj/">The Synthetic gnnCDR Data Object</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_obj/">The Synthetic gnnCDR Data Object</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Creating Train/Test/Val Datasets</a>
-    <ul class="current">
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_synth_data/data_split/">Creating Train/Test/Val Datasets</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Real Data</span></p>
@@ -102,8 +100,16 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Parking Lot</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../04_parking_lot/prism/">Predicting Cell Viability</a>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Predicting Cell Viability</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#exog">Exog.</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#endog">Endog.</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#questions">Questions:</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">User Guide</span></p>
@@ -127,7 +133,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Synthetic Data &raquo;</li><li>Creating Train/Test/Val Datasets</li>
+          <li>Parking Lot &raquo;</li><li>Predicting Cell Viability</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -137,41 +143,52 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="creating-the-train-test-validation-datasets">Creating the Train-Test-Validation datasets</h1>
-<p>We will create three datasets, </p>
+                <h1 id="goal-train-a-model-to-predict-cell-viabilty-prism-surrogate-using-perturbed-expression-latent-state-gnncdr-time-agnostic-latent-state">Goal: Train a model to predict cell viabilty (~PRISM surrogate) using perturbed expression latent state (GNNCDR time-agnostic latent state).</h1>
+<h2 id="exog">Exog.</h2>
+<p>Use a pre-trained GNNCDR model to predict perturbed expression time-agnostic latent state (z in GNNCDR model figures). </p>
+<h2 id="endog">Endog.</h2>
+<p>Use PRISM assay, as provided by depmap. This comes in two flavors ... </p>
+<p>Primary Screen: All 1 dose (2.5 uM) ~ lots of drugs 
+Secondary Screen: 8 Dose points ~ fewer drugs </p>
+<p>outcome is provided in form of logfold change compared to DMSO controls... e.g., outcome = abundance_drug / abundance_dmso 
+then:   </p>
+<ul>
+<li>outcome &gt; 1 ~ stimulates growth </li>
+<li>outcome = 1 ~ no difference in behavior </li>
+<li>outcome &lt; 1 ~ inhibitory </li>
+</ul>
+<p>General range of data in <a href="https://depmap.org/portal/download/all/?releasename=PRISM+Repurposing+19Q4&amp;filename=primary-screen-replicate-collapsed-logfold-change.csv">primary screen</a> ~ [-5,2]</p>
+<p>From the secondary screen <a href="https://depmap.org/portal/download/all/?releasename=PRISM+Repurposing+19Q4&amp;filename=secondary-readme.txt">readme</a>, they claim to calculate <code>cell viability</code> using: </p>
+<blockquote>
+<blockquote>
+<p><strong>"Calculate viability data as two to the power of replicate-level logfold change data."</strong> </p>
+</blockquote>
+</blockquote>
+<p>However, that would lead to values between 0-2 (assuming not stimulatory behavior). I assume they mean they use: </p>
+<div class="arithmatex">\[ cell\_viability = 2^{(logfold\_change - 1)} \]</div>
+<p>Which will result in values [0,1] being inhibitory, &gt;1 being stimulatory. </p>
+<h2 id="questions">Questions:</h2>
+<ul>
+<li>How many drugs overlap with those used in GNNCDR? </li>
+<li>How many cell lines overlap with those used in GNNCDR? <ul>
+<li>in primary screen? in secondary screen? </li>
+</ul>
+</li>
+</ul>
+<p>References: </p>
+<blockquote>
+<blockquote>
 <ol>
-<li><code>train</code>: ALL genetic perturbations + a proportion of single agents  </li>
-<li><code>test</code>: a proportion of single agent data</li>
-<li><code>validation</code>: This will be combination data only.</li>
+<li>Corsello SM, Nagari RT, Spangler RD, Rossen J, Kocak M, Bryan JG, Humeidi R, Peck D, Wu X, Tang AA, Wang VM, Bender SA, Lemire E, Narayan R, Montgomery P, Ben-David U, Garvie CW, Chen Y, Rees MG, Lyons NJ, McFarland JM, Wong BT, Wang L, Dumont N, O'Hearn PJ, Stefan E, Doench JG, Harrington CN, Greulich H, Meyerson M, Vazquez F, Subramanian A, Roth JA, Bittker JA, Boehm JS, Mader CC, Tsherniak A, Golub TR. Discovering the anti-cancer potential of non-oncology drugs by systematic viability profiling. Nat Cancer. 2020 Feb;1(2):235-248. doi: 10.1038/s43018-019-0018-6. Epub 2020 Jan 20. PMID: 32613204; PMCID: PMC7328899.</li>
 </ol>
-<h1 id="single-agent-datasets">Single-agent Datasets</h1>
-<p>The <code>Train</code> and <code>Test</code> splits will only have single-agent perturbations. Since our model attempts to learn drug-specific parameters (binding affinity information) we can not exculde a drug entirely for the training dataset. Instead, we will group observations by <code>cell-line</code> + <code>drug</code> pairs and separate them into <em>either</em> train or test datasets. This allows us to train drug-specific parameters while still testing on unseen cell-line responses. This procedure is illustrated in figure 1. </p>
-<p><img alt="" src="../train-test-split.PNG" /></p>
-<h1 id="combination-agent-dataset">Combination-agent Dataset</h1>
-<p>The validation set will include only chemical combination-agent data. Performance on this data subset is the ultimate goal of our project. </p>
-<h1 id="example">Example</h1>
-<pre><code class="language-python">
-MySplitter = gnn_cdr.utils.DataSplitter('../data/synthetic_data.h5', train_test_ratio=0.8, include_genetic_perts=True)
-splits = MySplitter.get_idxs()
-
-print('# train obs:', splits['train'].shape[0])
-print('# test obs:', splits['test'].shape[0])
-print('# val observations:', splits['val'].shape[0])
-
-</code></pre>
-<p>Output: </p>
-<pre><code>
-# train obs: 13530
-# test obs: 550
-# val observations: 123750
-
-</code></pre>
+</blockquote>
+</blockquote>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../data_obj/" class="btn btn-neutral float-left" title="The Synthetic gnnCDR Data Object"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../02_real_data/fi_graph/" class="btn btn-neutral float-right" title="Functional Interaction Network">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../03_model/ppi_context_edge_weight_decay/" class="btn btn-neutral float-left" title="PPI trainable edge weights"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../pages_usage/mkdocs_guides/" class="btn btn-neutral float-right" title="Mkdocs Help">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -195,10 +212,10 @@ print('# val observations:', splits['val'].shape[0])
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../data_obj/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../03_model/ppi_context_edge_weight_decay/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../02_real_data/fi_graph/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../pages_usage/mkdocs_guides/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

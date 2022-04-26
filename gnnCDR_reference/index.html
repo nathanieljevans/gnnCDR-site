@@ -4,15 +4,22 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="shortcut icon" href="./img/favicon.ico" />
-    <title>Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
-    <link rel="stylesheet" href="./css/theme.css" />
-    <link rel="stylesheet" href="./css/theme_extra.css" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>gnnCDR module - Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
-    <script src="./js/jquery-3.6.0.min.js" defer></script>
+      <script>
+        // Current page data
+        var mkdocs_page_name = "gnnCDR module";
+        var mkdocs_page_input_path = "gnnCDR_reference.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
-      <script src="./js/html5shiv.min.js"></script>
+      <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
       <script>hljs.initHighlightingOnLoad();</script> 
@@ -24,9 +31,9 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="./." class="icon icon-home"> Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)
+          <a href=".." class="icon icon-home"> Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)
         </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
@@ -34,74 +41,74 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="./.">Home</a>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="./motivation/">Motivation</a>
+                <li class="toctree-l1"><a class="reference internal" href="../motivation/">Motivation</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="./problem_overview/">Problem Overview</a>
+                <li class="toctree-l1"><a class="reference internal" href="../problem_overview/">Problem Overview</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Synthetic Data</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="./01_synth_data/generation/">Generating a Synthetic Dataset</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../01_synth_data/generation/">Generating a Synthetic Dataset</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="./01_synth_data/data_obj/">The Synthetic gnnCDR Data Object</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../01_synth_data/data_obj/">The Synthetic gnnCDR Data Object</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="./01_synth_data/data_split/">Creating Train/Test/Val Datasets</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../01_synth_data/data_split/">Creating Train/Test/Val Datasets</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Real Data</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="#">Creating a Global Graph</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="./02_real_data/fi_graph/">Functional Interaction Network</a>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/fi_graph/">Functional Interaction Network</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="./02_real_data/dti_graph/">Drug-Target Interaction Network</a>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/dti_graph/">Drug-Target Interaction Network</a>
                 </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="#">Exogenous Features</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="./02_real_data/overview/">Overview</a>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/overview/">Overview</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="./02_real_data/expression/">Expression</a>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/expression/">Expression</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="./02_real_data/mutation/">Mutation</a>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/mutation/">Mutation</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="./02_real_data/cnv/">Copy Number Variation (CNV)</a>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/cnv/">Copy Number Variation (CNV)</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="./02_real_data/methylation/">Methylation</a>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/methylation/">Methylation</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="./02_real_data/gene_dep/">Gene Dependency</a>
+                <li class="toctree-l2"><a class="reference internal" href="../02_real_data/gene_dep/">Gene Dependency</a>
                 </li>
     </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Model Architecture</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="./03_model/gnnCDR_arch/">gnnCDR</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_model/gnnCDR_arch/">gnnCDR</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="./03_model/naiveNN_arch/">naiveNN</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_model/naiveNN_arch/">naiveNN</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="./03_model/targets_and_metrics/">Choice of Target and Metrics</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_model/targets_and_metrics/">Choice of Target and Metrics</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="./03_model/ppi_context_edge_weight_decay/">PPI trainable edge weights</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_model/ppi_context_edge_weight_decay/">PPI trainable edge weights</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Parking Lot</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="./04_parking_lot/prism/">Predicting Cell Viability</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_parking_lot/prism/">Predicting Cell Viability</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">User Guide</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="./pages_usage/mkdocs_guides/">Mkdocs Help</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pages_usage/mkdocs_guides/">Mkdocs Help</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="./pages_usage/syntax_examples/">Mkdocs Syntax</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../pages_usage/syntax_examples/">Mkdocs Syntax</a>
                   </li>
               </ul>
       </div>
@@ -111,13 +118,13 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="./.">Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
+          <a href="..">Predicting Cancer Drug Response (CDR) using Graph Neural Networks (GNN)</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="./." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>gnnCDR module</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -127,19 +134,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-
-  <h1 id="search">Search Results</h1>
-
-  <form id="content_search" action="search.html">
-    <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-    <input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off" autofocus title="Type search term here">
-  </form>
-
-  <div id="mkdocs-search-results" class="search-results" data-no-results-text="No results found">
-    Searching...
-  </div>
-
-
+                <h1 id="gnncdr-module">gnnCDR module</h1>
+<p>::: gnn_cdr.reactomefi</p>
+              
             </div>
           </div><footer>
 
@@ -167,13 +164,13 @@
     
   </span>
 </div>
-    <script>var base_url = '.';</script>
-    <script src="./js/theme_extra.js" defer></script>
-    <script src="./js/theme.js" defer></script>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
       <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
-      <script src="./javascripts/mathjax.js" defer></script>
-      <script src="./search/main.js" defer></script>
+      <script src="../javascripts/mathjax.js" defer></script>
+      <script src="../search/main.js" defer></script>
     <script defer>
         window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
